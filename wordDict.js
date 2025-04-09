@@ -19,7 +19,7 @@ let allImagesDict=[{
     masterURL:""
 },
 {
-    word:"Bark (from tree)",
+    word:"(Tree) Bark",
     url:[],
     masterURL:""
 },

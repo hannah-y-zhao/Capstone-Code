@@ -9,6 +9,12 @@ function pageHandling(){
         for(let i=0;i<allImagesDict.length;i++){
             let newdiv=document.createElement("div")
             newdiv.classList.add("gridItem")
+            newdiv.classList.add("border-2")
+            newdiv.classList.add("border-solid")
+            newdiv.classList.add("w-min-[100px]")
+            newdiv.classList.add("h-fit")
+            newdiv.classList.add("p-[20px]")
+            newdiv.classList.add("text-center")
             newdiv.dataset.word=allImagesDict[i].word
             newdiv.innerHTML=allImagesDict[i].word
             if(i==0){
@@ -81,4 +87,5 @@ document.addEventListener('keydown', function(event) {
 
 window.addEventListener("load",function(){
     pageHandling()
+    googleTranslateElementInit()
 })

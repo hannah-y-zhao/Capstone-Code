@@ -1,7 +1,10 @@
-/* universal */
+/* universal 
+
 html, body {
     margin: 0;
     padding: 0;
+    font-family: monospace;
+    overflow:hidden;
 }
 canvas {
     display: block;
@@ -21,7 +24,7 @@ img{
     mix-blend-mode: screen;
 }
 
-/* classes */
+/* classes 
 .row{
     display:flex;
     flex-direction: row;
@@ -35,16 +38,16 @@ img{
 }
 .hidden{
     display: none;
-}
+}*/
 .selected{
     background-color: aquamarine;
 }
+/*
 .page{
     display: flex;
     width: 100%;
     height:100%;
     flex-flow: column nowrap;
-    overflow: hidden;
 }
 .grid{
     width:fit-content;
@@ -60,7 +63,7 @@ img{
     box-sizing: border-box;
 }
 
-/* ids */
+/* ids */ 
 #container{
     background-color: pink;
     width:400px;
@@ -70,3 +73,10 @@ img{
     display: flex;
     flex:column nowrap;
 }
+/* #question{
+    width:20px;
+    height:20px;
+    box-sizing: content-box;
+    border: 1px solid black;
+    border-radius: 100%;
+} */
