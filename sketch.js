@@ -1,19 +1,22 @@
 // Machine Learning for Creative Coding
 // https://github.com/shiffman/ML-for-Creative-Coding
-
 let video;
 let depthResult;
 let depthEstimation;
 let results;
-
+let imgContainer=document.getElementById("container")
 let canvas;
+let savedItArr=[]
+let templog=document.getElementById("templog")
+let page1=document.getElementById("page1")
 
 async function setup() {
   // Create canvas and set up video capture with constraints
-  canvas = createCanvas(640, 480);
+  canvas = createCanvas(640, 400);
   canvas.id("testcanvas");
   video = createCapture(VIDEO);
   video.hide();
+  console.log("workd")
 
   video.size(1280, 720); //1280 x 720 pixels
 
@@ -107,14 +110,28 @@ function logProgress(progress) {
 }
 
 function keyTyped() {
-  console.log("typed");
-  if (key === "s" || key === "S") {
-    let canvasEl = document.getElementById("testcanvas");
-    let testurl = canvasEl.toDataURL();
-    print("saving image");
-    let newimg = document.createElement("img");
-    newimg.src = testurl;
-    document.body.appendChild(newimg);
-  }
-  return false;
+    // if(currentPage==1){
+        console.log("typed");
+        if (key === "s" || key === "S") {
+          let canvasEl = document.getElementById("testcanvas");
+          let testurl = canvasEl.toDataURL();
+          savedItArr.push(testurl)
+          templog.innerHTML+=`saving image<br/>`;
+        }else if(key === " " || key === "a"){
+          for(let i=0;i<savedItArr.length;i++){
+              let newimg = document.createElement("img");
+              newimg.src = savedItArr[i];
+              imgContainer.appendChild(newimg);
+          }
+          templog.innerHTML+=`displayed images<br/>`;
+        }else if(key==="1"){
+        }
+        return false;
+    // }
+  
 }
+window.addEventListener("load",()=>{
+    document.getElementById("word").innerHTML=localStorage.getItem("word")
+    // console.log("workd")
+    // document.getElementById("word").innerHTML=selectedWord
+})

@@ -1,7 +1,72 @@
+/* universal */
 html, body {
     margin: 0;
     padding: 0;
-  }
-  canvas {
+}
+canvas {
     display: block;
-  }  
+}  
+main{
+    display:flex;
+    flex-flow:row wrap;
+    padding:2rem;
+}
+header{
+    padding:2rem;
+}
+img{
+    position:absolute;
+    opacity:0.4;
+    width:400px;
+    mix-blend-mode: screen;
+}
+
+/* classes */
+.row{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+.gap{
+    gap:20px;
+}
+.space-between{
+    justify-content: space-between;
+}
+.hidden{
+    display: none;
+}
+.selected{
+    background-color: aquamarine;
+}
+.page{
+    display: flex;
+    width: 100%;
+    height:100%;
+    flex-flow: column nowrap;
+    overflow: hidden;
+}
+.grid{
+    width:fit-content;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap:20px;
+}
+.gridItem{
+    padding: 20px;
+    width:100px;
+    height:100px;
+    border: 1px black solid;
+    box-sizing: border-box;
+}
+
+/* ids */
+#container{
+    background-color: pink;
+    width:400px;
+    height:250px;
+}
+#templog{
+    display: flex;
+    flex:column nowrap;
+}
