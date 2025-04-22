@@ -1,4 +1,4 @@
-/* universal 
+/* universal */
 
 html, body {
     margin: 0;
@@ -6,6 +6,7 @@ html, body {
     font-family: monospace;
     overflow:hidden;
 }
+/*
 canvas {
     display: block;
 }  
@@ -17,12 +18,13 @@ main{
 header{
     padding:2rem;
 }
+    */
 img{
     position:absolute;
-    opacity:0.4;
+    opacity:0.6;
     width:400px;
     mix-blend-mode: screen;
-}
+} 
 
 /* classes 
 .row{
@@ -65,7 +67,7 @@ img{
 
 /* ids */ 
 #container{
-    background-color: pink;
+    background-color: black;
     width:400px;
     height:250px;
 }
