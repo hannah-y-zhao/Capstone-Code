@@ -3,116 +3,139 @@
     {
         "word": "You",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"people"
     },
     {
         "word": "I",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"people"
     },
     {
         "word": "Mother",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"people"
     },
     {
         "word": "To Give",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"verbs"
     },
     {
         "word": "(Tree) Bark",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"craft"
     },
     {
         "word": "Black",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"fire"
     },
     {
         "word": "Fire",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"fire"
     },
     {
         "word": "Ashes",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"fire"
     },
     {
         "word": "To Spit",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"verbs"
     },
     {
         "word": "Man/Male",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"people"
     },
     {
         "word": "Hand",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"people"
     },
     {
         "word": "To Hear",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"verbs"
     },
     {
         "word": "To Flow",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"verbs"
     },
     {
         "word": "Old",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"things"
     },
     {
         "word": "This",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"things"
     },
     {
         "word": "That",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"things"
     },
     {
         "word": "Worm",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"worm"
     },
     {
         "word": "Your",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"people"
     },
     {
         "word": "Not",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"things"
     },
     {
         "word": "We",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"people"
     },
     {
         "word": "Who",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"people"
     },
     {
         "word": "What",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"things"
     },
     {
         "word": "Pull",
         "urls": [],
-        "masterURL": ""
+        "masterURL": "",
+        "category":"verbs"
     }
 ]}

@@ -15,7 +15,7 @@ const firebaseConfig = {
 
   // Example function to write to Firebase
   function toFirebase(index,url,masterURL) {
-    console.log(url)
+    // console.log(url)
     if (masterURL){
         database.ref('database/database/'+index+'/masterURL').set(masterURL)
         .then(() => {

@@ -12,32 +12,40 @@
 </head>
 
 <body>
-    <div class="flex flex-col gap-[2rem] page m-8 font-mono overflow-hidden">
+    <div class="flex flex-col gap-[2rem] page mx-[4rem] mt-[4rem] font-mono">
         <header class="flex flex-row justify-between items-center">
-            <h1 id="pg1-h1" class="pg1 text-2xl align-baseline">Pick a word</h1>
-            <h1 id="pg2-h1" class="pg2 hidden text-2xl align-baseline">What Does "<div id="word" class="inline">Word</div>" Look Like to You?</h1>
+            <h1 id="pg1-h1" class="pg1 text-2xl align-baseline font-bold">Pick A Word</h1>
+            <h1 id="pg2-h1" class="pg2 hidden text-2xl align-baseline">What Does <div id="word" class="inline font-bold">[Word]</div> Look Like to You?</h1>
             <div id="pg2-instructions" class="pg2 hidden">Build using the provided blocks and press SPACE when finished</div>
-            <h1 id="pg3-h1" class="pg3 hidden text-2xl align-baseline">Average "<div id="word" class="inline">Word</div>"</h1>
-            <!-- <div class="flex flex-row justify-between gap-x-[20px] w-auto items-center">
-                <div id="question" class="border-2 border-solid rounded-4xl w-[40px] h-[40px] justify-center text-center place-self-center">?</div>
-                <div id="translate" class=""></div>
-            </div> -->
+            <h1 id="pg3-h1" class="pg3 hidden text-2xl align-baseline">Compare the similarity between <div id="word1" class="inline font-bold">[...]</div> and <div id="word2" class="inline font-bold">[...]</div></h1>
+            <h1 id="pg3-h2" class="pg3 hidden text-2xl align-baseline">These words are visually <div id="resemblePercent" class="inline font-bold">[...]</div>% similar </h1>
+            <div id="p1-h2" class="pg1 flex flex-row justify-between gap-x-[20px] w-auto items-center text-lg ">
+                <div id="people-category" class="bg-blue-300 ">[about people]</div>
+                <div id="thing-category" class="bg-yellow-300">[about things]</div>
+                <div id="fire-category" class="bg-orange-300">[about fire]</div>
+                <div id="verbs-category" class="bg-purple-300">[of verbs]</div>
+                <div id="craft-category" class="bg-lime-400">[craft material]</div>
+                <div id="worm-category" class="bg-pink-400">[worm]</div>
+                <!-- <div id="translate" class=""></div> -->
+            </div>
         </header>
-        <main id="page1" class="pg1 flex flex-col gap-[2rem]">
+        <main id="page1" class="pg1 flex flex-col gap-[2rem] mt-[2rem]">
             <div id="instructions">Use ARROW keys to pick your word and press SPACE to confirm</div>
-            <div class="grid grid-cols-8 gap-[20px]" id="allWords"></div>
+            <div class="grid grid-cols-8 gap-8 mt-[2rem]" id="allWords"></div>
         </main>
-        <main id="page2" class="pg2 hidden flex flex-row gap-[2rem]">
+        <main id="page2" class="pg2 hidden flex flex-row gap-[2rem] justify-center align-center">
         </main>
-        <main id="page3" class="pg3 hidden flex flex-row gap-[2rem]">
-            <div id="container" ></div>
+        <main id="page3" class="pg3 hidden flex flex-row gap-[2rem] justify-center">
+            <div id="container" class="flex flex-row flex-wrap gap-[2rem] justify-center"></div>
         </main>
         
     </div>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="translation.js"></script>
     <script src="tf-helper.js"></script>
-    <!-- <script src="wordDict.js"></script> -->
+    <script type="module">
+	import pixelmatch from 'https://esm.run/pixelmatch';
+    window.pixelmatch = pixelmatch;</script>
     <script src="firebase.js" ></script>
     <script src="changePages.js"></script>
     <script src="sketch.js"></script>

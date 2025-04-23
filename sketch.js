@@ -13,19 +13,25 @@ let canvasEl;
 let currentWord, currentDictSection;
 let currentClick = 0;
 let pg2 = document.getElementById("page2");
+let canvasDim=640
+let vidW=1920
+let vidH=1200
+let xRatio=vidW/canvasDim
+let yRatio=vidH/canvasDim
+let selected1, selected2
+let selecting=0
+let firstSelected, secondSelected
 
 async function setup() {
   // Create canvas and set up video capture with constraints
   if (currentPage == 1) {
-    canvas = createCanvas(640, 400);
+    canvas = createCanvas(canvasDim, canvasDim);
     canvas.id("canvas");
     canvasEl = document.getElementById("canvas");
     pg2.appendChild(canvasEl);
     video = createCapture(VIDEO);
     video.hide();
-    console.log("workd");
-
-    video.size(1920, 1200); //1280 x 720 pixels
+    video.size(vidW, vidH); //1280 x 720 pixels
 
     // Load the Transformers.js model pipeline with async/await
     let pipeline = await loadTransformers();
@@ -42,26 +48,15 @@ async function setup() {
       "onnx-community/depth-anything-v2-small",
       options
     );
-    currentWord = document.getElementById("word").innerHTML =
-    localStorage.getItem("word");
-  getFirebase((data) => {
-    currentData = data.database;
-    console.log(currentData);
-    for (let i = 0; i < currentData.length; i++) {
-      if (currentWord == currentData[i].word) {
-        currentDictSection = i;
-        console.log(currentDictSection)
-        return;
-      }
-    }
-  });
   }
 }
 
 function draw() {
   // Draw the video on the canvas
   if (currentPage == 2) {
-    image(video, 0, 0, video.width / 3, video.height / 3);
+    let canvasAspect = canvasDim / canvasDim; // 1:1
+    let videoAspect = video.width / video.height;
+    image(video, -(canvasDim * videoAspect - canvasDim) / 2, 0, canvasDim * videoAspect, canvasDim);
 
     // If depth results are available, visualize them using pixel manipulation
     if (results) {
@@ -104,46 +99,118 @@ function draw() {
           }
         }
       }
-    
 
-    // Update the pixels of the depth image
-    depthImg.updatePixels();
-    fill(0, 0, 0);
-    rect(0, 0, 640, 480);
-    // Draw the depth image on the canvas
-    image(depthImg, 0, 0, width, height);
-    let currentURL = canvasEl.toDataURL();
-    console.log(currentURL)
-    toFirebase(currentDictSection, currentURL, "");
-    let newimg = document.createElement("img");
-    newimg.src = currentURL;
+      // Update the pixels of the depth image
+      depthImg.updatePixels();
 
-    noLoop();
+      let dAspect = depth.width / depth.height;
+      let dW, dH, dx, dy;
+
+        dH = canvasDim;
+        dW = canvasDim * dAspect;
+        dx = (canvasDim - dW) / 2;
+        dy = 0;
+
+
+      fill(getColor(localStorage.getItem("category")));
+      rect(0, 0, canvasDim, canvasDim);
+      // Draw the depth image on the canvas
+    //   image(depthImg, 0, 0, canvasDim, canvasDim);
+    image(depthImg, dx, dy, dW, dH)
+      let currentURL = canvasEl.toDataURL();
+    //   console.log(currentURL);
+      toFirebase(currentDictSection, currentURL, "");
+      let newimg = document.createElement("img");
+      newimg.src = currentURL;
+
+      noLoop();
+    }
   }
 }
+
+function selectedAverageImage(selectedCanvas){
+    if(selecting==0){
+        firstSelected=selectedCanvas
+        secondSelected=""
+        word1.innerHTML=`[${selectedCanvas.dataset.word}]`
+        selected1=selectedCanvas.getContext("2d")
+        selecting++
+        document.querySelectorAll(".averageImagesCanvas").forEach(canvas => {
+            canvas.style.border=`none`;
+            canvas.style.opacity="0.5"
+          });
+          word2.innerHTML=`[...]`
+    }else if(selecting==1){
+        secondSelected=selectedCanvas
+        word2.innerHTML=`[${selectedCanvas.dataset.word}]`
+        selected2=selectedCanvas.getContext("2d")
+        const img1 = selected1.getImageData(0, 0, 300, 300);
+        const img2 = selected2.getImageData(0, 0, 300, 300);
+        let resembleData=window.pixelmatch(img1.data, img2.data, null, 300, 300, {threshold: 0.15});
+        let resemblePercent=(((img1.width*img1.height)-resembleData)/(img1.width*img1.height))*100
+        document.getElementById("resemblePercent").innerHTML=resemblePercent
+        selecting=0
+        selected1=""
+    }
+    selectedCanvas.style.border=`2px solid ${getColor(selectedCanvas.dataset.category)}`;
+    selectedCanvas.style.opacity="1"
 }
 
-function page3(){
-    currentWord = document.getElementById("word")
-    currentWord.innerHTML=localStorage.getItem("word");
-    getFirebase((data) => {
-        currentData = data.database;
-        for(let i=0;i<currentData.length;i++){
-            if(currentData[i].urls){
-                let keys=Object.keys(currentData[i].urls)
-                keys.forEach(key => {
-                    const value = currentData[i].urls[key];
-                    console.log(`Key: ${key}, Value: ${value}`);
-                    let newimg=document.createElement("img")
-                    newimg.src=value
-                    newimg.classList.add("absolute")
-                    newimg.classList.add("top-[20px]")
-                    newimg.classList.add("left-[20px]")
-                    document.getElementById("container").appendChild(newimg)
-                  });
-            }
-        }
-    })
+function getColor(category){
+    if(category=="people"){
+        return peopleCategory;
+      }else if(category=="things"){
+        return thingsCategory;
+      }else if(category=="verbs"){
+        return verbsCategory;
+      }else if(category=="craft"){
+        return craftCategory;
+      }else if(category=="fire"){
+        return fireCategory;
+      }else if(category=="worm"){
+        return wormCategory;
+      }
+}
+
+function page3() {
+  getFirebase((data) => {
+    currentData = data.database;
+    for (let i = 0; i < currentData.length; i++) {
+      const miniCanvas = document.createElement("canvas");
+      miniCanvas.classList.add("averageImagesCanvas")
+      miniCanvas.classList.add("opacityTransition")
+      miniCanvas.dataset.word=currentData[i].word
+      miniCanvas.dataset.category=currentData[i].category
+      miniCanvas.classList.add("box-border")
+      miniCanvas.style.opacity=".5"
+
+      miniCanvas.width = 300; 
+      miniCanvas.height = 300;
+      const ctx = miniCanvas.getContext("2d");
+      ctx.globalCompositeOperation ="screen"
+
+      const canvasWrapper = document.createElement("div");
+      canvasWrapper.classList.add("w-fit")
+      canvasWrapper.classList.add("h-fit")
+      canvasWrapper.style.backgroundColor=getColor(currentData[i].category)
+      canvasWrapper.appendChild(miniCanvas);
+      document.getElementById("container").appendChild(canvasWrapper);
+      if (currentData[i].urls) {
+        let keys = Object.keys(currentData[i].urls);
+        keys.forEach((key) => {
+          const value = currentData[i].urls[key];
+          const img = new Image();
+          img.src = value;
+          img.onload = () => {
+            ctx.drawImage(img, 0, 0, 300, 300);
+          };
+        });
+        ctx.rect(0,0,300,300);
+        ctx.fillStyle = getColor(currentData[i].category);
+        ctx.fill();
+      }
+    }
+  });
 }
 
 async function estimateDepth() {
@@ -153,17 +220,3 @@ async function estimateDepth() {
 function logProgress(progress) {
   console.log(`loading model: ${progress.status} ${progress.progress || ""}`);
 }
-
-function keyTyped() {
-  if (key === " " || key === " ") {
-    if (currentClick == 1) {
-      estimateDepth();
-    }
-    currentClick++
-  }
-  return false;
-}
-
-window.addEventListener("load", () => {
-  
-});
