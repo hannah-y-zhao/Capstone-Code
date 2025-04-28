@@ -1,6 +1,9 @@
 // Machine Learning for Creative Coding
 // https://github.com/shiffman/ML-for-Creative-Coding
+// Select cameras reference https://editor.p5js.org/codingtrain/sketches/JjRoa1lWO
+// Depth estimation reference https://editor.p5js.org/ml_4_cc/sketches/qtnSdaa2h
 let video;
+const devices=[]
 let depthResult;
 let depthEstimation;
 let results;
@@ -25,13 +28,9 @@ let firstSelected, secondSelected
 async function setup() {
   // Create canvas and set up video capture with constraints
   if (currentPage == 1) {
-    canvas = createCanvas(canvasDim, canvasDim);
-    canvas.id("canvas");
-    canvasEl = document.getElementById("canvas");
-    pg2.appendChild(canvasEl);
-    video = createCapture(VIDEO);
-    video.hide();
-    video.size(vidW, vidH); //1280 x 720 pixels
+    navigator.mediaDevices.enumerateDevices()
+    .then(gotDevices);
+    
 
     // Load the Transformers.js model pipeline with async/await
     let pipeline = await loadTransformers();
@@ -50,6 +49,48 @@ async function setup() {
     );
   }
 }
+
+function gotDevices(deviceInfos) {
+    let constraints
+    for (let i = 0; i !== deviceInfos.length; ++i) {
+      const deviceInfo = deviceInfos[i];
+      if (deviceInfo.kind == 'videoinput') {
+        devices.push({
+          label: deviceInfo.label,
+          id: deviceInfo.deviceId
+        });
+      }
+    }
+    console.log(devices);
+    let supportedConstraints = navigator.mediaDevices.getSupportedConstraints();
+    console.log(supportedConstraints);
+    if(devices.length>1){
+        constraints = {
+            video: {
+              deviceId: {
+                exact: devices[1].id
+              },
+            }
+          };
+    }else{
+        constraints = {
+            video: {
+              deviceId: {
+                exact: devices[0].id
+              },
+            }
+          };
+    }
+    
+    video=createCapture(constraints);
+    canvas = createCanvas(canvasDim, canvasDim);
+    canvas.id("canvas");
+    canvasEl = document.getElementById("canvas");
+    pg2.appendChild(canvasEl);
+    // video = createCapture(VIDEO);
+    video.hide();
+    video.size(vidW, vidH); //1280 x 720 pixels
+  }
 
 function draw() {
   // Draw the video on the canvas
