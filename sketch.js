@@ -122,7 +122,7 @@ function draw() {
           // Calculate the corresponding pixel index in the depth image
           let pixelIndex = index * 4;
 
-          if (depthValue <= 180) {
+          if (depthValue <= 180||depthValue>=240) {
             depthImg.pixels[pixelIndex] = 0;
             depthImg.pixels[pixelIndex + 1] = 0;
             depthImg.pixels[pixelIndex + 2] = 0;
@@ -131,9 +131,9 @@ function draw() {
             depthImg.pixels[pixelIndex + 3] = 255;
           } else {
             // Set the RGB values to the depth value for a grayscale effect
-            depthImg.pixels[pixelIndex] = depthValue;
-            depthImg.pixels[pixelIndex + 1] = depthValue;
-            depthImg.pixels[pixelIndex + 2] = depthValue;
+            depthImg.pixels[pixelIndex] = depthValue+20;
+            depthImg.pixels[pixelIndex + 1] = depthValue+20;
+            depthImg.pixels[pixelIndex + 2] = depthValue+20;
 
             // Set the alpha value to fully opaque
             depthImg.pixels[pixelIndex + 3] = 255;
@@ -230,17 +230,24 @@ function page3() {
       const ctx = miniCanvas.getContext("2d");
       ctx.globalCompositeOperation ="screen"
 
+      const wordName=document.createElement("div")
+      wordName.innerHTML=`[${currentData[i].word}]`
+      wordName.classList.add("text-center")
+
       const canvasWrapper = document.createElement("div");
       canvasWrapper.classList.add("w-fit")
       canvasWrapper.classList.add("h-fit")
+      canvasWrapper.classList.add("gap-2")
       canvasWrapper.style.backgroundColor=getColor(currentData[i].category)
       canvasWrapper.appendChild(miniCanvas);
+      canvasWrapper.appendChild(wordName);
       document.getElementById("container").appendChild(canvasWrapper);
       if (currentData[i].urls) {
         let keys = Object.keys(currentData[i].urls);
         keys.forEach((key) => {
           const value = currentData[i].urls[key];
           const img = new Image();
+          img.style.opacity=1/(keys.length)
           img.src = value;
           img.onload = () => {
             ctx.drawImage(img, 0, 0, 300, 300);

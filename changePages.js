@@ -79,7 +79,7 @@ function updateSelection(index) {
         
             // Add "selected" class to the new item
             // console.log(getColor(allAveragedImages[index].dataset.category))
-            allAveragedImages[index].style.border=`2px dashed ${getColor(allAveragedImages[index].dataset.category)}`;
+            allAveragedImages[index].style.border=`2px dashed black`;
             allAveragedImages[index].style.opacity="1"
             // selectedWord = allAveragedImages[index].dataset.word; // Update selected word
         }
