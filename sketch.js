@@ -122,7 +122,7 @@ function draw() {
           // Calculate the corresponding pixel index in the depth image
           let pixelIndex = index * 4;
 
-          if (depthValue <= 180||depthValue>=240) {
+          if (depthValue <= 180) {
             depthImg.pixels[pixelIndex] = 0;
             depthImg.pixels[pixelIndex + 1] = 0;
             depthImg.pixels[pixelIndex + 2] = 0;
