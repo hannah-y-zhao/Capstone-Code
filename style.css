@@ -83,6 +83,14 @@ header{
     /* width:400px;
     height:250px; */
 }
+#back{
+    text-decoration: underline;
+    transition:all .2s
+}
+#back:hover{
+    text-decoration: none;
+    border: 2px solid black;
+}
 #templog{
     display: flex;
     flex:column nowrap;
