@@ -16,7 +16,7 @@ let canvasEl;
 let currentWord, currentDictSection;
 let currentClick = 0;
 let pg2 = document.getElementById("page2");
-let canvasDim=640
+let canvasDim=1280//640 regular laptop
 let vidW=1920
 let vidH=1200
 let xRatio=vidW/canvasDim
@@ -95,7 +95,6 @@ function gotDevices(deviceInfos) {
 function draw() {
   // Draw the video on the canvas
   if (currentPage == 2) {
-    let canvasAspect = canvasDim / canvasDim; // 1:1
     let videoAspect = video.width / video.height;
     image(video, -(canvasDim * videoAspect - canvasDim) / 2, 0, canvasDim * videoAspect, canvasDim);
 
