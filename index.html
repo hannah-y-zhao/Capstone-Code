@@ -12,24 +12,24 @@
 </head>
 
 <body>
-    <div class="flex flex-col gap-[2rem] page mx-[4rem] font-mono">
+    <div class="flex flex-col gap-[2rem] page mx-[4rem] font-mono h-screen">
         <header class="flex flex-row justify-between items-center sticky top-0 pt-[4rem] bg-white pb-[2rem] z-100">
             <h1 id="pg1-h1" class="pg1 text-6xl align-baseline font-bold">Pick A Word</h1>
-            <h1 id="pg2-h1" class="pg2 hidden text-6xl align-baseline font-bold">What Does <div id="word" class="inline font-bold">[Word]</div> Look Like to You?</h1>
-            <div id="pg2-instructions" class="pg2 hidden text-2xl">Build using the provided blocks and press SELECT when finished and NEXT PAGE to continue</div>
-            <h1 id="pg3-h1" class="pg3 hidden text-6xl align-baseline font-bold">Compare with SELECT the similarity between <div id="word1" class="inline font-bold">[...]</div> and <div id="word2" class="inline font-bold">[...]</div></h1>
-            <h1 id="pg3-h2" class="pg3 hidden text-6xl align-baseline ">These words are visually <div id="resemblePercent" class="inline font-bold">[...]</div>% similar </h1>
+            <h1 id="pg2-h1" class="pg2 hidden text-6xl align-baseline font-bold text-nowrap">What Does <div id="word" class="inline font-bold">[Word]</div> Look Like to You?</h1>
+            <div id="pg2-instructions" class="pg2 hidden text-4xl text-right pl-[6rem] align-baseline">Build using the provided blocks within the borders. Press SELECT when finished and NEXT PAGE to continue</div>
+            <h1 id="pg3-h1" class="pg3 hidden text-6xl align-baseline font-bold"><div id="word1" class="inline font-bold">[...]</div> and <div id="word2" class="inline font-bold">[...]</div> are visually <div id="resemblePercent" class="inline font-bold">[...]</div>% similar</h1>
+            <h1 id="pg3-h2" class="pg3 hidden text-4xl align-baseline ">Compare the similarity between words with SELECT</h1>
             <div id="p1-h2" class="pg1 flex flex-row justify-between gap-x-[20px] w-auto items-center text-lg ">
-                <div id="people-category" class="bg-blue-300 text-2xl">[about people]</div>
-                <div id="thing-category" class="bg-yellow-300 text-2xl">[about things]</div>
-                <div id="fire-category" class="bg-orange-300 text-2xl">[about fire]</div>
-                <div id="verbs-category" class="bg-purple-300 text-2xl">[of verbs]</div>
-                <div id="craft-category" class="bg-lime-400 text-2xl">[craft material]</div>
-                <div id="worm-category" class="bg-pink-400 text-2xl">[worm]</div>
+                <div id="people-category" class="bg-blue-300 text-4xl">[about people]</div>
+                <div id="thing-category" class="bg-yellow-300 text-4xl">[about things]</div>
+                <div id="fire-category" class="bg-orange-300 text-4xl">[about fire]</div>
+                <div id="verbs-category" class="bg-purple-300 text-4xl">[of verbs]</div>
+                <div id="craft-category" class="bg-lime-400 text-4xl">[craft material]</div>
+                <div id="worm-category" class="bg-pink-400 text-4xl">[worm]</div>
                 <!-- <div id="translate" class=""></div> -->
             </div>
         </header>
-        <main id="page1" class="pg1 flex flex-col gap-[2rem] mt-[2rem] text-2xl">
+        <main id="page1" class="pg1 flex flex-col gap-[2rem] mt-[2rem] text-4xl h-max content-center">
             <div id="instructions">Use ARROW keys to pick your word and press NEXT PAGE to confirm</div>
             <div class="grid grid-cols-8 gap-8 mt-[2rem]" id="allWords"></div>
         </main>

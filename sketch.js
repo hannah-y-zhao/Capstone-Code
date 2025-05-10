@@ -16,9 +16,9 @@ let canvasEl;
 let currentWord, currentDictSection;
 let currentClick = 0;
 let pg2 = document.getElementById("page2");
-let canvasDim=1280//640 regular laptop
-let vidW=1920
-let vidH=1200
+let canvasDim=1200//640 regular laptop
+let vidW=1920//1920
+let vidH=1080//1200
 let xRatio=vidW/canvasDim
 let yRatio=vidH/canvasDim
 let selected1, selected2
@@ -121,7 +121,7 @@ function draw() {
           // Calculate the corresponding pixel index in the depth image
           let pixelIndex = index * 4;
 
-          if (depthValue <= 180) {
+          if (depthValue <= 120||depthValue>=235) {
             depthImg.pixels[pixelIndex] = 0;
             depthImg.pixels[pixelIndex + 1] = 0;
             depthImg.pixels[pixelIndex + 2] = 0;
@@ -180,17 +180,19 @@ function selectedAverageImage(selectedCanvas){
             canvas.style.opacity="0.5"
           });
           word2.innerHTML=`[...]`
+          document.getElementById("resemblePercent").innerHTML=`[...]`
     }else if(selecting==1){
         secondSelected=selectedCanvas
         word2.innerHTML=`[${selectedCanvas.dataset.word}]`
         selected2=selectedCanvas.getContext("2d")
         const img1 = selected1.getImageData(0, 0, 300, 300);
         const img2 = selected2.getImageData(0, 0, 300, 300);
-        let resembleData=window.pixelmatch(img1.data, img2.data, null, 300, 300, {threshold: 0.15});
+        let resembleData=window.pixelmatch(img1.data, img2.data, null, 300, 300, {threshold: 0.15});//returns amount of pixels that dont match?
         let resemblePercent=(((img1.width*img1.height)-resembleData)/(img1.width*img1.height))*100
         document.getElementById("resemblePercent").innerHTML=resemblePercent
         selecting=0
         selected1=""
+        console.log(resembleData,img1.width*img1.height)
     }
     selectedCanvas.style.border=`2px solid ${getColor(selectedCanvas.dataset.category)}`;
     selectedCanvas.style.opacity="1"

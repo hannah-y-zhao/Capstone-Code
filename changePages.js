@@ -4,7 +4,7 @@ let allWordsGrid = document.getElementById("allWords");
 let selectedIndex = 0; // Keep track of the selected item index
 let selectedWordIndex = 0;
 let itemsPerRow = 8; // You can adjust this based on your grid's layout
-let wordsPerRow = 4;
+let wordsPerRow = 7;
 let word1=document.getElementById("word1")
 let word2=document.getElementById("word2")
 let currentData;
@@ -27,10 +27,12 @@ function pageHandling() {
         newdiv.classList.add("border-2");
         newdiv.classList.add("border-solid");
         newdiv.classList.add("w-min-[100px]");
-        newdiv.classList.add("h-fit");
-        newdiv.classList.add("p-[20px]");
+        newdiv.classList.add("h-[200px]");
+        //newdiv.classList.add("h-fit");
+        newdiv.classList.add("text-4xl");
         newdiv.classList.add("text-center");
         newdiv.classList.add("colorTransition");
+        newdiv.classList.add("content-center")
         newdiv.dataset.word = currentData[i].word;
         newdiv.dataset.category=currentData[i].category
         newdiv.innerHTML = currentData[i].word;
