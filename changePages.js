@@ -101,6 +101,23 @@ document.addEventListener("keydown", function (event) {
   if (currentPage == 1) {
     event.preventDefault()
     if (allItems.length === 0) return; // Prevent errors if no items exist
+    if(event.key==" "){
+      currentWord = document.getElementById("word")
+        currentWord.innerHTML =`[${localStorage.getItem("word")}]`;
+        getFirebase((data) => {
+          currentData = data.database;
+          // console.log(currentData);
+          for (let i = 0; i < currentData.length; i++) {
+            if (localStorage.getItem("word") == currentData[i].word) {
+              currentWord.style.backgroundColor=getColor(currentData[i].category)
+              currentDictSection = i;
+              console.log(currentWord,currentData[i].word)
+              // console.log(currentDictSection);
+              return;
+            }
+          }
+        });
+    }
 
     if (event.key === "ArrowDown") {
       if (selectedIndex + itemsPerRow < allItems.length) {
