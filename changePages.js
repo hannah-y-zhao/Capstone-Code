@@ -102,22 +102,7 @@ document.addEventListener("keydown", function (event) {
     event.preventDefault()
     if (allItems.length === 0) return; // Prevent errors if no items exist
     if(event.key==" "){
-      currentWord = document.getElementById("word")
-        currentWord.innerHTML =`[${localStorage.getItem("word")}]`;
-        getFirebase((data) => {
-          currentData = data.database;
-          // console.log(currentData);
-          for (let i = 0; i < currentData.length; i++) {
-            if (localStorage.getItem("word") == currentData[i].word) {
-              currentWord.style.backgroundColor=getColor(currentData[i].category)
-              currentDictSection = i;
-              console.log(currentWord,currentData[i].word)
-              currentPage++
-              // console.log(currentDictSection);
-              return;
-            }
-          }
-        });
+      updatePage()
     }
 
     if (event.key === "ArrowDown") {
@@ -178,39 +163,44 @@ document.addEventListener("keydown", function (event) {
   }
 });
 document.addEventListener("click",()=>{
-       if (currentPage == 1) {
-        currentWord = document.getElementById("word")
-        currentWord.innerHTML =`[${localStorage.getItem("word")}]`;
-        getFirebase((data) => {
-          currentData = data.database;
-          // console.log(currentData);
-          for (let i = 0; i < currentData.length; i++) {
-            if (localStorage.getItem("word") == currentData[i].word) {
-              currentWord.style.backgroundColor=getColor(currentData[i].category)
-              currentDictSection = i;
-              console.log(currentWord,currentData[i].word)
-              // console.log(currentDictSection);
-              return;
-            }
-          }
-        });
-      }
-    //   if (currentClick != 1) {
-          if(currentPage==3){
-              window.location.reload()
-          }else{
-              currentPage++
-          }
-    //   }
-      if (currentPage == 3) {
-        page3();
-      }
-      let currentElements = document.querySelectorAll(".pg" + currentPage);
-      currentElements.forEach((cEl) => cEl.classList.remove("hidden"));
-  
-      let prevElements = document.querySelectorAll(".pg" + (currentPage - 1));
-      prevElements.forEach((pEl) => pEl.classList.add("hidden"));
+  updatePage()
+      
 })
+
+function updatePage(){
+  if (currentPage == 1) {
+    currentWord = document.getElementById("word")
+    currentWord.innerHTML =`[${localStorage.getItem("word")}]`;
+    getFirebase((data) => {
+      currentData = data.database;
+      // console.log(currentData);
+      for (let i = 0; i < currentData.length; i++) {
+        if (localStorage.getItem("word") == currentData[i].word) {
+          currentWord.style.backgroundColor=getColor(currentData[i].category)
+          currentDictSection = i;
+          console.log(currentWord,currentData[i].word)
+          // console.log(currentDictSection);
+          return;
+        }
+      }
+    });
+  }
+//   if (currentClick != 1) {
+      if(currentPage==3){
+          window.location.reload()
+      }else{
+          currentPage++
+      }
+//   }
+  if (currentPage == 3) {
+    page3();
+  }
+  let currentElements = document.querySelectorAll(".pg" + currentPage);
+  currentElements.forEach((cEl) => cEl.classList.remove("hidden"));
+
+  let prevElements = document.querySelectorAll(".pg" + (currentPage - 1));
+  prevElements.forEach((pEl) => pEl.classList.add("hidden"));
+}
 
 window.addEventListener("load", function () {
   googleTranslateElementInit();
