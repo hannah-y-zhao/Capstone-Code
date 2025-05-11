@@ -112,6 +112,7 @@ document.addEventListener("keydown", function (event) {
               currentWord.style.backgroundColor=getColor(currentData[i].category)
               currentDictSection = i;
               console.log(currentWord,currentData[i].word)
+              currentPage++
               // console.log(currentDictSection);
               return;
             }
