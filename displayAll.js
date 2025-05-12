@@ -36,14 +36,15 @@ function display() {
         miniCanvas.dataset.category=currentData[i].category
         miniCanvas.classList.add("box-border")
   
-        miniCanvas.width = 300; 
-        miniCanvas.height = 300;
+        miniCanvas.width = 400; 
+        miniCanvas.height = 400;
         const ctx = miniCanvas.getContext("2d");
         ctx.globalCompositeOperation ="screen"
   
         const wordName=document.createElement("div")
         wordName.innerHTML=`[${currentData[i].word}]`
         wordName.classList.add("text-center")
+        wordName.classList.add("text-6xl")
   
         const canvasWrapper = document.createElement("div");
         canvasWrapper.classList.add("w-fit")
@@ -61,10 +62,10 @@ function display() {
             img.style.opacity=1/(keys.length)
             img.src = value;
             img.onload = () => {
-              ctx.drawImage(img, 0, 0, 300, 300);
+              ctx.drawImage(img, 0, 0, 400, 400);
             };
           });
-          ctx.rect(0,0,300,300);
+          ctx.rect(0,0,400,400);
           ctx.fillStyle = getColor(currentData[i].category);
           ctx.fill();
         }
@@ -74,7 +75,7 @@ function display() {
                     const value = currentData[i].urls[key];
                     const img = document.createElement("img");
                     img.src = value;
-                    img.style.width="30%"
+                    img.style.width="45%"
                     img.style.height="auto"
                     // img.style.height="100px"
                     panel.appendChild(img);
